@@ -1,0 +1,44 @@
+{
+  "plain": {
+    "coop_drive": false,
+    "pre_delivery_rate": 0.20666666666666667,
+    "post_delivery_rate": 1.0,
+    "pre_mean_steps": 54.443333333333335,
+    "post_mean_steps": 4.0,
+    "learning_curve": [
+      0.71,
+      1.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "coop": {
+    "coop_drive": true,
+    "pre_delivery_rate": 0.20666666666666667,
+    "post_delivery_rate": 1.0,
+    "pre_mean_steps": 54.443333333333335,
+    "post_mean_steps": 5.0,
+    "learning_curve": [
+      0.25,
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  }
+}

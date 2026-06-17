@@ -1,0 +1,115 @@
+{
+  "history": [
+    {
+      "generation": 0,
+      "best_fitness": 2.1952380952380954,
+      "mean_fitness": 1.7521428571428572,
+      "elite_mean_fitness": 2.0587301587301585,
+      "gene_means": {
+        "reciprocity": 0.2204623456358522
+      }
+    },
+    {
+      "generation": 1,
+      "best_fitness": 2.176190476190476,
+      "mean_fitness": 1.7980952380952382,
+      "elite_mean_fitness": 2.1095238095238096,
+      "gene_means": {
+        "reciprocity": 0.04046417437477212
+      }
+    },
+    {
+      "generation": 2,
+      "best_fitness": 2.4404761904761907,
+      "mean_fitness": 2.0090476190476187,
+      "elite_mean_fitness": 2.3000000000000003,
+      "gene_means": {
+        "reciprocity": 0.09567904685586047
+      }
+    },
+    {
+      "generation": 3,
+      "best_fitness": 2.3595238095238096,
+      "mean_fitness": 1.9021428571428571,
+      "elite_mean_fitness": 2.2373015873015873,
+      "gene_means": {
+        "reciprocity": 0.05521487248108834
+      }
+    },
+    {
+      "generation": 4,
+      "best_fitness": 2.242857142857143,
+      "mean_fitness": 1.7102380952380951,
+      "elite_mean_fitness": 2.0484126984126987,
+      "gene_means": {
+        "reciprocity": 0.21040874369188808
+      }
+    },
+    {
+      "generation": 5,
+      "best_fitness": 2.1547619047619047,
+      "mean_fitness": 1.9357142857142857,
+      "elite_mean_fitness": 2.111111111111111,
+      "gene_means": {
+        "reciprocity": 0.4464902804286445
+      }
+    },
+    {
+      "generation": 6,
+      "best_fitness": 2.0595238095238093,
+      "mean_fitness": 1.72,
+      "elite_mean_fitness": 2.0087301587301587,
+      "gene_means": {
+        "reciprocity": 0.7221716964174615
+      }
+    },
+    {
+      "generation": 7,
+      "best_fitness": 2.454761904761905,
+      "mean_fitness": 1.8673809523809524,
+      "elite_mean_fitness": 2.2357142857142858,
+      "gene_means": {
+        "reciprocity": 1.341234168967128
+      }
+    },
+    {
+      "generation": 8,
+      "best_fitness": 2.711904761904762,
+      "mean_fitness": 2.3247619047619046,
+      "elite_mean_fitness": 2.634920634920635,
+      "gene_means": {
+        "reciprocity": 2.038078297760428
+      }
+    },
+    {
+      "generation": 9,
+      "best_fitness": 2.3857142857142857,
+      "mean_fitness": 1.940238095238095,
+      "elite_mean_fitness": 2.253174603174603,
+      "gene_means": {
+        "reciprocity": 2.0355037456271377
+      }
+    },
+    {
+      "generation": 10,
+      "best_fitness": 2.7071428571428573,
+      "mean_fitness": 2.251190476190476,
+      "elite_mean_fitness": 2.5880952380952382,
+      "gene_means": {
+        "reciprocity": 2.2184950638913716
+      }
+    },
+    {
+      "generation": 11,
+      "best_fitness": 2.780952380952381,
+      "mean_fitness": 2.291666666666667,
+      "elite_mean_fitness": 2.5936507936507938,
+      "gene_means": {
+        "reciprocity": 2.533970518892732
+      }
+    }
+  ],
+  "best_reciprocity": 2.758185433380657,
+  "coop_seed": 0.430952380952381,
+  "coop_evolved": 0.7738095238095238
+}

@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reward-stack-rl"
+version = "0.1.0"
+description = "A multi-agent RL testbed for the hypothesis that a stack of reward functions produces dynamic, human-like, cooperative behaviour."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Argos" }]
+keywords = ["reinforcement-learning", "multi-agent", "intrinsic-motivation",
+            "brain-like-agi", "cooperative-ai", "steering-subsystem"]
+dependencies = ["numpy>=1.24"]
+
+[project.optional-dependencies]
+plot = ["matplotlib>=3.7"]
+
+[tool.setuptools.packages.find]
+include = ["rlstack*"]

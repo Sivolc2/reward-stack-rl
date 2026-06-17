@@ -1,0 +1,5 @@
+# Core runtime dependency — that's it. Everything runs on Python 3.11+ + numpy.
+numpy>=1.24
+
+# Optional: only needed if you want PNG plots instead of the built-in ASCII ones.
+# matplotlib>=3.7
