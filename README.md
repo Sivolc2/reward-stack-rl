@@ -31,6 +31,12 @@ environments.
 
 ## The architecture
 
+![reward-stack-rl agent architecture](docs/architecture.png)
+
+*One agent = a stack of N reward functions (drives) + a steering subsystem that
+arbitrates them into the single scalar the learner sees. Editable source:
+[`docs/architecture.mmd`](docs/architecture.mmd) / [`docs/architecture.excalidraw`](docs/architecture.excalidraw).*
+
 ```
             world events                  arbitrated scalar reward
   env  ───────────────────►  ┌─────────────────────────────┐  ───────►  learner

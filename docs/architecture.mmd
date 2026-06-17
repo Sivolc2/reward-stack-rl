@@ -1,0 +1,43 @@
+graph LR
+  ENV["Environment<br/>(ResourceWorld)"]
+
+  subgraph STEER["STEERING SUBSYSTEM — the stack of reward functions"]
+    direction TB
+    H["hunger<br/>(homeostatic)"]
+    S["safety<br/>(fear)"]
+    SO["social<br/>(affiliation)"]
+    C["curiosity<br/>(novelty)"]
+    ARB["Arbitration<br/>R = Σ rᵢ·wᵢ / Σ wⱼ"]
+    H -->|"r₁ , w₁"| ARB
+    S -->|"r₂ , w₂"| ARB
+    SO -->|"r₃ , w₃"| ARB
+    C -->|"r₄ , w₄"| ARB
+  end
+
+  ENV -->|"events: ate? · hazard near? · got hurt? · neighbours? · (x,y)"| H
+  ENV --> S
+  ENV --> SO
+  ENV --> C
+
+  ARB -->|"single scalar R"| Q["Q-learner<br/>(tabular — sees only R)"]
+  Q -->|"action: N / E / S / W / stay"| ENV
+
+  N1["learner sees ONE scalar"]
+  N2["wᵢ are dynamic urgencies —<br/>they rise as a drive goes unsatisfied"]
+  N3["same event is worth different amounts<br/>in different internal states → goal-switching"]
+
+  N1 -.-> Q
+  N2 -.-> ARB
+  N3 -.-> STEER
+
+  classDef env fill:#1c232c,stroke:#58a6ff,stroke-width:2px,color:#e6edf3
+  classDef drive fill:#161b22,stroke:#f0a500,stroke-width:2px,color:#e6edf3
+  classDef arb fill:#161b22,stroke:#3fb950,stroke-width:2px,color:#e6edf3
+  classDef learn fill:#1c232c,stroke:#bc8cff,stroke-width:2px,color:#e6edf3
+  classDef note fill:#0e1116,stroke:#8b949e,stroke-width:1px,color:#8b949e
+
+  class ENV env
+  class H,S,SO,C drive
+  class ARB arb
+  class Q learn
+  class N1,N2,N3 note

@@ -10,6 +10,8 @@ env/
 .DS_Store
 .ipynb_checkpoints/
 *.png
+# but DO commit rendered doc diagrams:
+!docs/*.png
 # Keep results/*.json (they are the committed experiment outputs) but ignore scratch.
 results/scratch/
 .gstack/
