@@ -12,3 +12,4 @@ env/
 *.png
 # Keep results/*.json (they are the committed experiment outputs) but ignore scratch.
 results/scratch/
+.gstack/

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>reward-stack-rl · live viewer</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header>
+  <h1>reward-stack-rl <span class="sub">· watch the steering subsystem act</span></h1>
+  <p class="tagline">A stack of reward functions (hunger · safety · social · curiosity) vs a single
+  reward — replayed from the trained agents. Open this file directly; no server needed.</p>
+  <nav id="tabs">
+    <button class="tab active" data-tab="grid">ResourceWorld</button>
+    <button class="tab" data-tab="tug">TugGame</button>
+    <button class="tab" data-tab="results">Results</button>
+  </nav>
+</header>
+
+<main>
+  <!-- ResourceWorld ------------------------------------------------------- -->
+  <section id="grid" class="panel active">
+    <div class="stage">
+      <canvas id="gridCanvas" width="540" height="540"></canvas>
+      <aside class="side">
+        <div class="seg" id="gridVariant">
+          <button class="on" data-variant="stacked">Full stack</button>
+          <button data-variant="survival">Survival only</button>
+        </div>
+        <p class="hint" id="gridHint"></p>
+        <div class="legend">
+          <span><i class="dot food"></i>food</span>
+          <span><i class="tri hazard"></i>hazard</span>
+          <span><i class="dot agent"></i>agent (ring = dominant drive)</span>
+        </div>
+        <h3>Agent <select id="agentSel"></select> — dominant drive</h3>
+        <div id="domLabel" class="dom-label">—</div>
+        <div id="driveBars" class="bars"></div>
+        <p class="note">The bars are each drive's live <b>urgency</b>. The loudest one
+        (the dominant drive) wins the steering wheel — watch it switch as the agent
+        gets hungry, sees a hazard, or gets bored.</p>
+      </aside>
+    </div>
+    <div class="controls">
+      <button id="gridPlay" class="play">⏸ pause</button>
+      <input type="range" id="gridScrub" min="0" value="0" />
+      <span id="gridFrame" class="frame">0</span>
+      <label>speed <input type="range" id="gridSpeed" min="1" max="30" value="12" /></label>
+    </div>
+  </section>
+
+  <!-- TugGame ------------------------------------------------------------- -->
+  <section id="tug" class="panel">
+    <div class="stage">
+      <canvas id="tugCanvas" width="480" height="480"></canvas>
+      <aside class="side">
+        <div class="seg" id="tugVariant">
+          <button data-variant="untrained">Before training</button>
+          <button class="on" data-variant="trained">After training</button>
+        </div>
+        <p class="hint">Three agents each control one rope. The bottle (O) only moves when their
+        pulls triangulate and <b>grip</b> it together — a shared actuator with private controls.
+        Goal: carry it to <b>B</b>.</p>
+        <div class="legend">
+          <span><i class="dot" style="background:#f0a500"></i>anchor 0</span>
+          <span><i class="dot" style="background:#58a6ff"></i>anchor 1</span>
+          <span><i class="dot" style="background:#3fb950"></i>anchor 2</span>
+        </div>
+        <div class="stat"><span>gripped</span><b id="tugGrip">—</b></div>
+        <div class="stat"><span>distance to goal</span><b id="tugDist">—</b></div>
+        <p class="note">Before training the team flails for the full episode; after training they
+        grip immediately and deliver in a handful of steps.</p>
+      </aside>
+    </div>
+    <div class="controls">
+      <button id="tugPlay" class="play">⏸ pause</button>
+      <input type="range" id="tugScrub" min="0" value="0" />
+      <span id="tugFrame" class="frame">0</span>
+      <label>speed <input type="range" id="tugSpeed" min="1" max="20" value="6" /></label>
+    </div>
+  </section>
+
+  <!-- Results ------------------------------------------------------------- -->
+  <section id="results" class="panel">
+    <div class="cards">
+      <div class="card"><h3>1 · Prisoner's dilemma</h3>
+        <p>A reciprocity drive on <i>unchanged</i> payoffs lifts cooperation.</p>
+        <canvas id="ipdChart" width="460" height="240"></canvas>
+        <div id="ipdNum" class="kpi"></div>
+      </div>
+      <div class="card"><h3>2 · ResourceWorld ablation</h3>
+        <p>Each added drive moves its own behaviour the most.</p>
+        <canvas id="ablChart" width="460" height="240"></canvas>
+        <div id="ablNum" class="kpi"></div>
+      </div>
+      <div class="card"><h3>3 · TugGame</h3>
+        <p>Cooperation from a shared actuator, learned from the shared reward alone.</p>
+        <canvas id="tugChart" width="460" height="240"></canvas>
+        <div id="tugNum" class="kpi"></div>
+      </div>
+      <div class="card"><h3>4 · Generational drift</h3>
+        <p>Selfish payoff selection grows the reciprocity gene; cooperation emerges.</p>
+        <canvas id="evoChart" width="460" height="240"></canvas>
+        <div id="evoNum" class="kpi"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>github.com/Sivolc2/reward-stack-rl · regenerate replays with <code>python -m viewer.record</code></footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

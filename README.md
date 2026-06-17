@@ -92,6 +92,36 @@ python -m experiments.exp_evolve      # Exp 4: cooperation evolves across genera
 python -m unittest discover -s tests  # 16 unit tests, no pytest needed
 ```
 
+## Watch it act
+
+Two ways to *see* the agents, not just the numbers:
+
+**Browser dashboard** (`viewer/index.html`) — open it directly in any browser, no
+server needed. It animates the trained agents and shows the results charts:
+- **ResourceWorld** — watch the agents move; each carries a drive-coloured ring
+  showing which drive currently holds the steering wheel, and a live bar panel of
+  one agent's drive urgencies. Flip the **Full stack ↔ Survival only** toggle to
+  *see* the difference: the stack dodges hazards, clusters, and keeps switching
+  goals; the baseline just chases food.
+- **TugGame** — toggle **Before ↔ After training** to watch three agents go from
+  flailing to gripping the bottle and carrying it to the goal.
+- **Results** — the four experiments as charts (cooperation curves, the drive
+  ablation, tug delivery, the evolving reciprocity gene).
+
+```bash
+python -m viewer.record        # regenerate the replays + results into viewer/data.js
+open viewer/index.html         # then just open it (macOS; or double-click the file)
+```
+
+**Terminal live viewer** — runs the *real* simulation live in your terminal
+(colour ANSI), with a live drive-urgency read-out:
+
+```bash
+python -m viewer.live grid             # ResourceWorld, full drive stack
+python -m viewer.live grid --survival  # the single-reward baseline, for contrast
+python -m viewer.live tug              # cooperative control game
+```
+
 ## Headline results (one representative seeded run — see [RESULTS.md](RESULTS.md))
 
 1. **Prisoner's dilemma.** An innate `ReciprocityDrive` *stacked on top of
@@ -146,6 +176,7 @@ rlstack/
   evolution.py     generational drift over drive-stack genomes
   envs/            prisoners.py · tug.py · gridworld.py
 experiments/       exp_prisoners · exp_gridworld · exp_tug · exp_evolve · run_all
+viewer/            index.html + app.js (browser dashboard) · record.py · live.py (terminal)
 tests/             test_core.py (unittest)
 results/           committed JSON outputs of the experiments
 RESEARCH.md        existing-work landscape review
