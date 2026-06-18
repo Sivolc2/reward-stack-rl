@@ -117,6 +117,33 @@ Both use one bridge pattern: read the env's real per-agent state → feed the
 drive falls out of the world's dynamics (the LeCun-"configurator" role on a real
 world model).
 
+## posteco — the reward stack applied to post-labor economics
+
+[`posteco/`](posteco/) is a stylized agent-based model of the post-labor
+transition: heterogeneous agents whose consume/hoard/invest behaviour comes from
+their drives (subsistence vs acquisition) **modulated by fear vs vision**, in an
+economy where automation shifts output from labor to capital and demand can
+collapse. It's a quantitative *mechanism* sandbox (conditional on automation, not
+a forecast) for the "Potholes on the Way to Utopia" framework. Three experiments:
+
+- **The pothole is optional** — the automation level at which the economy tips
+  into the sinkhole depends on the regime: laissez-faire tips first, a leaky
+  wealth tax only delays it (capital routes around redistribution), a
+  non-dilutable commons charter holds.
+- **Commons-share threshold** — ~10% prevents collapse (the framework's 20% has
+  margin), *but* it stops starvation without de-concentrating capital (the Game B
+  limit, quantified).
+- **Fear vs vision** — holding institutions fixed, collective fear idles ~24% of
+  capacity vs ~2% under vision: prosperity created or destroyed by belief alone.
+
+```bash
+python -m posteco.experiments.run_all   # ~2s, numpy only
+```
+
+Same drives, same `gini` metric as the RL core; see [`posteco/README.md`](posteco/README.md)
+for the thesis mapping and the honest caveats (Hanson's timing objection,
+mechanism-not-magnitude, Game B).
+
 ## Watch it act
 
 Two ways to *see* the agents, not just the numbers:
