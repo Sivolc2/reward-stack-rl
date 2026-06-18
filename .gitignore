@@ -15,3 +15,6 @@ env/
 # Keep results/*.json (they are the committed experiment outputs) but ignore scratch.
 results/scratch/
 .gstack/
+
+# NeuralMMO generates map binaries into ./maps when run from repo root
+maps/

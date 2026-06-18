@@ -39,11 +39,41 @@ uv pip install --python .venv/bin/python -r requirements.txt
 .venv/bin/python drive_bridge.py
 ```
 
-## Toward the civilization / economic sim
+## The economy bridge (`economy.py`)
 
-1. **Trade / acquisition drive** keyed on `gold` + `Market`, with agents actually
-   buying/selling — the seed of an economy. *(in progress)*
-2. **Replace random policy** with a learner (shared neural policy + the reward
-   stack as its reward; nmmo ships PufferLib hooks).
+Adds the new **`AcquisitionDrive`** (a wealth-seeking drive keyed on each agent's
+`gold`) to the stack and gives agents a scripted trade policy that buys/sells on
+the Market via the legal `ActionTargets` masks. Measured:
+
+```
+  tick alive listings meanGold maxGold wealthGini  sells  buys
+     0   128        0    10.00      10      0.000     37    91
+    50    62       62    10.03      13      0.029   1347  4158
+   100    26       26    10.27      16      0.076   1873  5708
+   149    17       17    10.47      21      0.132   2152  6508
+  final: mean gold 10.5 · max 21 · wealth Gini 0.132 · 6508 buys, 2152 sells
+  dominant share: hunger 58% · thirst 19% · curiosity 14% · acquisition 6.5% · safety 2%
+```
+
+- **The market clears** — 6,508 buys — once the policy acts on *demand*, not just
+  supply. (A market with only sellers never transacts; that was the first lesson.)
+- **Wealth inequality (Gini) emerges endogenously**, climbing 0.0 → 0.13 over 150
+  ticks as some agents accumulate (max gold 10 → 21) — even with near-random
+  behaviour. This is exactly the kind of dynamic an economic model wants to study.
+- **The acquisition drive participates** (6.5% dominant share): poorer agents
+  (below their wealth target) weight it more, richer agents less.
+- It uses a small **starting-capital endowment** (`EXCHANGE_BASE_GOLD = 10`); with
+  the stock 1 gold there's no purchasing power and the market can't clear.
+
+Run: `.venv/bin/python economy.py`
+
+## Toward the full economic sim
+
+1. ✅ **Acquisition drive + a clearing market + wealth-inequality metric** — done
+   (`economy.py`).
+2. **Replace the random policy with a learner** (shared neural policy + the reward
+   stack as its reward; nmmo ships PufferLib hooks) so trade is strategic —
+   forage, survive, accumulate, specialise.
 3. **Generational drift** (`rlstack/evolution.py`) over drive parameters across
-   episodes — let the society's drive balance evolve under selection.
+   episodes — let the society's drive balance (incl. how acquisitive it is) evolve
+   under selection, and watch how that changes inequality.

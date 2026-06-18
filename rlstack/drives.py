@@ -357,3 +357,53 @@ class ReciprocityDrive(Drive):
 
     def urgency(self, ctx: Mapping[str, Any]) -> float:
         return self.urgency_value
+
+
+class AcquisitionDrive(Drive):
+    """Wealth-seeking: rewards *gaining* a fungible resource (e.g. gold), with
+    urgency that scales with how poor the agent is relative to a target.
+
+    This is the economic drive in the stack. Unlike a homeostatic drive (which
+    defends a setpoint and is satisfied at it), acquisition keeps wanting more as
+    long as the agent is below target, and is rewarded by the *increase* in
+    wealth — so it pushes agents toward trade/accumulation. Reading ``wealth``
+    from the context lets the same drive sit on any environment that exposes a
+    currency (Neural MMO's ``gold``, a market balance, etc.).
+    """
+
+    def __init__(
+        self,
+        name: str = "acquisition",
+        *,
+        wealth_key: str = "wealth",
+        target: float = 10.0,
+        gain: float = 0.2,
+        urgency_gain: float = 1.2,
+    ) -> None:
+        self.name = name
+        self.wealth_key = wealth_key
+        self.target = target
+        self.gain = gain
+        self.urgency_gain = urgency_gain
+        self._wealth = 0.0
+        self._delta = 0.0
+
+    def reset(self) -> None:
+        self._wealth = 0.0
+        self._delta = 0.0
+
+    def step(self, ctx: Mapping[str, Any]) -> None:
+        new = float(ctx.get(self.wealth_key, self._wealth))
+        self._delta = new - self._wealth
+        self._wealth = new
+
+    def reward(self, ctx: Mapping[str, Any]) -> float:
+        # Rewarded by gaining wealth (and mildly stung by losing it).
+        return self.gain * self._delta
+
+    def urgency(self, ctx: Mapping[str, Any]) -> float:
+        poverty = max(0.0, (self.target - self._wealth) / self.target)
+        return 0.05 + self.urgency_gain * poverty
+
+    def level(self) -> float:
+        return _clamp(self._wealth / self.target)

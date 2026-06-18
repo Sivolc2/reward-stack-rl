@@ -18,6 +18,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from rlstack import make_agent, make_ipd_agent, make_survival_agent  # noqa: E402
 from rlstack.agent import QLearningAgent  # noqa: E402
 from rlstack.drives import (  # noqa: E402
+    AcquisitionDrive,
     CuriosityDrive,
     HomeostaticDrive,
     ReciprocityDrive,
@@ -76,6 +77,19 @@ class TestDrives(unittest.TestCase):
         d = ReciprocityDrive(mutual_coop_bonus=1.0, guilt=1.0)
         self.assertGreater(d.reward({"my_move": 1, "opp_move": 1}), 0.0)  # mutual coop
         self.assertLess(d.reward({"my_move": 0, "opp_move": 1}), 0.0)     # guilt
+
+    def test_acquisition(self):
+        d = AcquisitionDrive(target=10.0, gain=1.0, urgency_gain=1.0)
+        d.reset()
+        # Gaining wealth is rewarding; urgency falls as wealth approaches target.
+        d.step({"wealth": 4.0})
+        self.assertAlmostEqual(d.reward({}), 4.0)   # gained 4
+        poor = d.urgency({})
+        d.step({"wealth": 9.0})
+        rich = d.urgency({})
+        self.assertGreater(poor, rich)              # poorer => more acquisitive
+        d.step({"wealth": 9.0})                      # no gain
+        self.assertAlmostEqual(d.reward({}), 0.0)
 
 
 class TestSteering(unittest.TestCase):

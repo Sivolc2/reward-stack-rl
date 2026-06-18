@@ -9,6 +9,7 @@ from __future__ import annotations
 
 from .agent import BrainAgent, QLearningAgent
 from .drives import (
+    AcquisitionDrive,
     CuriosityDrive,
     Drive,
     ExtrinsicDrive,
@@ -30,6 +31,7 @@ __all__ = [
     "CuriosityDrive",
     "ExtrinsicDrive",
     "ReciprocityDrive",
+    "AcquisitionDrive",
     "make_survival_agent",
     "make_stacked_agent",
     "make_agent",
