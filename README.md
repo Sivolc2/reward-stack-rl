@@ -98,6 +98,25 @@ python -m experiments.exp_evolve      # Exp 4: cooperation evolves across genera
 python -m unittest discover -s tests  # 16 unit tests, no pytest needed
 ```
 
+## Integrations — the drive stack on real RL environments
+
+The core is numpy-only, but the *same* drives + steering subsystem bridge onto
+heavier, real environments under [`integrations/`](integrations/) (each with its
+own optional venv — installing them never touches the core):
+
+- **[`integrations/craftax/`](integrations/craftax/)** — [Craftax](https://github.com/MichaelTMatthews/Craftax)
+  (single-agent Crafter+NetHack, JAX). Watch the dominant drive switch
+  curiosity → thirst → hunger as Craftax's real physiology depletes.
+- **[`integrations/nmmo/`](integrations/nmmo/)** — [Neural MMO](https://neuralmmo.github.io)
+  (128 agents + a Market exchange). The multi-agent / **economic** substrate for
+  the civilization track; runs the full stack (incl. `social`) in 128 brains at
+  ~140 ticks/s on CPU.
+
+Both use one bridge pattern: read the env's real per-agent state → feed the
+`rlstack` drives → run the same urgency-weighted arbitration, so the dominant
+drive falls out of the world's dynamics (the LeCun-"configurator" role on a real
+world model).
+
 ## Watch it act
 
 Two ways to *see* the agents, not just the numbers:
