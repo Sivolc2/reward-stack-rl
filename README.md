@@ -14,12 +14,23 @@ keep bolting on extra innate drives, and the interaction of that stack — fear
 wired to "skittering things", hunger, affiliation, curiosity, all nested under
 survival — is a lot of what makes behaviour rich, flexible, and goal-switching.
 
-We test the computational version of that idea: give a tabular RL agent a
-**stack of drives** (each a small reward function with its own dynamic urgency)
-and a **steering subsystem** that arbitrates between them, then check whether the
-resulting behaviour is measurably more dynamic, safer, more social, and more
-cooperative than a single-reward baseline — across a progression of
-environments.
+It rests on two convergent claims from neuroscience. **Steven Byrnes (Astera)**
+splits the brain into a *Steering Subsystem* (innate, hard-wired drives) and a
+*Learning Subsystem* (a from-scratch learner with no goals of its own) — all
+motivation originates in the drive stack. **Marblestone, Wayne & Kording (2016)**
+argue the brain optimises *diverse, heterogeneous cost functions* that differ
+across regions and across development, largely *internally generated* — not one
+global loss. Put together: intelligence is a from-scratch learner steered by a
+*stack of many specialised reward functions*, arbitrated moment to moment. This
+repo is the computational toy of exactly that claim.
+
+We test it directly: give a tabular RL agent a **stack of drives** (each a small
+reward function with its own dynamic urgency) and a **steering subsystem** that
+arbitrates between them, then check whether the resulting behaviour is measurably
+more dynamic, safer, more social, and more cooperative than a single-reward
+baseline — across a progression of environments. See [RESEARCH.md](RESEARCH.md)
+for the full lineage (Byrnes, Marblestone, intrinsic motivation, homeostatic RL,
+modular RL, cooperative MARL).
 
 > Companion docs: **[RESEARCH.md](RESEARCH.md)** (the existing-work landscape —
 > Byrnes, Marblestone's cost functions, intrinsic motivation, homeostatic RL,
@@ -116,33 +127,6 @@ Both use one bridge pattern: read the env's real per-agent state → feed the
 `rlstack` drives → run the same urgency-weighted arbitration, so the dominant
 drive falls out of the world's dynamics (the LeCun-"configurator" role on a real
 world model).
-
-## posteco — the reward stack applied to post-labor economics
-
-[`posteco/`](posteco/) is a stylized agent-based model of the post-labor
-transition: heterogeneous agents whose consume/hoard/invest behaviour comes from
-their drives (subsistence vs acquisition) **modulated by fear vs vision**, in an
-economy where automation shifts output from labor to capital and demand can
-collapse. It's a quantitative *mechanism* sandbox (conditional on automation, not
-a forecast) for the "Potholes on the Way to Utopia" framework. Three experiments:
-
-- **The pothole is optional** — the automation level at which the economy tips
-  into the sinkhole depends on the regime: laissez-faire tips first, a leaky
-  wealth tax only delays it (capital routes around redistribution), a
-  non-dilutable commons charter holds.
-- **Commons-share threshold** — ~10% prevents collapse (the framework's 20% has
-  margin), *but* it stops starvation without de-concentrating capital (the Game B
-  limit, quantified).
-- **Fear vs vision** — holding institutions fixed, collective fear idles ~24% of
-  capacity vs ~2% under vision: prosperity created or destroyed by belief alone.
-
-```bash
-python -m posteco.experiments.run_all   # ~2s, numpy only
-```
-
-Same drives, same `gini` metric as the RL core; see [`posteco/README.md`](posteco/README.md)
-for the thesis mapping and the honest caveats (Hanson's timing objection,
-mechanism-not-magnitude, Game B).
 
 ## Watch it act
 
